@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { TriggerReviewResponseDto } from './dto/trigger-review-response.dto';
 import { BitbucketPullRequestResponseDto } from './dto/bitbucket-request.dto';
@@ -14,7 +12,7 @@ import {
 
 @Injectable()
 export class BitbucketService {
-  constructor(private readonly httpService: HttpService) {}
+  constructor() {}
 
   async triggerReview(
     webhookResponse: BitbucketPullRequestResponseDto,
@@ -26,18 +24,19 @@ export class BitbucketService {
     const commitUrl = webhookResponse.pullrequest.source.commit.links.self.href;
     const commitData = await fetchCommit(commitUrl);
     const diffUrl = commitData.links.diff.href;
-
     const commitDiffData = await getchCommitDiff(diffUrl);
-
     const reviewMd = await getCodeReview(commitDiffData);
+
     const result = await postPrComment(
       reviewMd,
       workspace,
       slug,
       pullRequestId,
     );
+
     console.log(reviewMd);
     console.log(result);
+
     return new TriggerReviewResponseDto(result);
   }
 }
