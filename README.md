@@ -2,7 +2,7 @@
 
 > _Supercharge your pull requests with intelligent AI-powered code reviews_
 
-**AI Code Reviewer** is a cutting-edge NestJS application that transforms your development workflow by delivering instant, insightful code reviews. When Bitbucket webhooks trigger our `/api/v1/bitbucket/reviews` endpoint, our AI springs into action, automatically analyzing your code and posting thoughtful review comments directly to your pull requests.
+**AI Code Reviewer** is an AI-powered NestJS tool that streamlines your development workflow by automatically generating pull request reviews. When a new PR is created in your Bitbucket repository, a webhook triggers our AI to instantly analyze the code and post intelligent, actionable review comments directly to the pull request, helping your team maintain high-quality code with minimal effort.
 
 ---
 
